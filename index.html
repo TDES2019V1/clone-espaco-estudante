@@ -6,17 +6,51 @@
     <title>Espaço do Estudante Fake</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 </head>
-<body>
-    <div class="login">
-        <h1>Bem-Vindo</h1>    
-        <span id="subtitulo">ao Espaço do Estudante</span>    
-        
-        <div class="inputs_login">
-            <i class="fa fa-user"></i>
-            <input type="text" placeholder="Usuário">
+<body>    
+    <div id="container">
+        <div class="login">
+            <h1 :title="titulo">{{ titulo }}</h1>    
+            <span id="subtitulo">{{ subtitulo }}</span>    
+            
+            <div class="inputs_login">
+                <i class="fa fa-user"></i>
+                <input type="text" placeholder="Usuário" v-model="login">
+            </div>
+
+            <div class="inputs_login">
+                <i class="fa fa-lock"></i>
+                <input type="password" placeholder="Senha" v-model="senha">
+            </div>
+
+            <button @click="logar">Logar</button><br>
+
+            <span style="color: red">{{ logado }}</span>
+
         </div>
+        <div class="estudante"></div>
     </div>
-    
+
+    <script>
+        let container = new Vue({
+            el: "#container", 
+            data: {
+                subtitulo : "ao espaço do estudante",
+                titulo: "Bem-Vindo",
+                login: '',
+                senha: '',
+                logado: ''
+            }, methods: {
+                logar: function() {
+                    if (this.login=="senai" && this.senha=="123") {
+                        this.logado = 'Logado com sucesso!'
+                    } else {
+                        this.logado = 'Login inválido!'
+                    }
+                }
+            }
+        })
+    </script>
 </body>
 </html>
